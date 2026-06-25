@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Books Catalogue</title>
 
 <style>
-
 :root{
     --primary:#3d5a80;
     --accent:#ee6c4d;
@@ -59,7 +56,6 @@ h1{
 }
 
 /* CAROUSEL */
-
 .carousel-section{
     margin-top:35px;
     margin-bottom:50px;
@@ -121,7 +117,6 @@ h1{
 }
 
 /* BOOK CARDS */
-
 #booksContainer{
     display:flex;
     flex-direction:column;
@@ -173,7 +168,6 @@ h1{
 }
 
 @media(max-width:768px){
-
     .book-card{
         flex-direction:column;
     }
@@ -187,9 +181,7 @@ h1{
         font-size:2rem;
     }
 }
-
 </style>
-
 </head>
 
 <body>
@@ -197,31 +189,21 @@ h1{
 <div class="container">
 
 <header>
-
-```
-<h1>Books Catalogue</h1>
-
-<div class="search-box">
-    <input
-        type="text"
-        id="searchInput"
-        placeholder="Search by title or author..."
-    >
-</div>
-```
-
+    <h1>Books Catalogue</h1>
+    <div class="search-box">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search by title or author..."
+        >
+    </div>
 </header>
 
 <section class="carousel-section">
-
-```
-<div class="carousel-header">
-    Featured Books
-</div>
-
-<div id="bookCarousel" class="carousel"></div>
-```
-
+    <div class="carousel-header">
+        Featured Books
+    </div>
+    <div id="bookCarousel" class="carousel"></div>
 </section>
 
 <section id="booksContainer"></section>
@@ -229,99 +211,81 @@ h1{
 </div>
 
 <script>
-
 let books=[];
 
 function generateStars(rating){
-
     const full=Math.round(rating);
-
     return "★".repeat(full) + "☆".repeat(5-full);
 }
 
 async function loadBooks(){
-
-    const response=await fetch("books.json");
-
-    books=await response.json();
-
-    renderCarousel(books);
-
-    renderBooks(books);
+    try {
+        const response = await fetch("books.json");
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        books = await response.json();
+        renderCarousel(books);
+        renderBooks(books);
+    } catch (error) {
+        console.error("Could not load the books. Please ensure books.json exists and is properly formatted:", error);
+    }
 }
 
 function renderCarousel(data){
-
     const carousel=document.getElementById("bookCarousel");
-
     carousel.innerHTML="";
 
     data.forEach((book,index)=>{
-
         carousel.innerHTML += `
         <div class="carousel-item"
              onclick="scrollToBook(${index})">
-
             <img src="${book.cover}" alt="${book.title}">
-
             <div class="carousel-title">
                 ${book.title}
             </div>
-
             <div class="carousel-rating">
                 ${generateStars(book.rating)}
             </div>
-
         </div>
         `;
     });
 }
 
 function renderBooks(data){
-
     const container=document.getElementById("booksContainer");
-
     container.innerHTML="";
 
     data.forEach((book,index)=>{
-
         container.innerHTML += `
-
         <article class="book-card"
                  id="book-${index}">
-
             <div class="book-cover">
                 <img src="${book.cover}">
             </div>
-
             <div class="book-info">
-
                 <div class="book-title">
                     ${book.title}
                 </div>
-
                 <div class="book-author">
                     ${book.author}
                 </div>
-
                 <div class="rating">
                     ${generateStars(book.rating)}
                     (${book.rating})
                 </div>
-
                 <div class="synopsis">
                     ${book.synopsis}
                 </div>
-
             </div>
-
         </article>
         `;
     });
 }
 
 function scrollToBook(index){
-
     document
     .getElementById(`book-${index}`)
     .scrollIntoView({
@@ -333,22 +297,16 @@ function scrollToBook(index){
 document
 .getElementById("searchInput")
 .addEventListener("input",(e)=>{
-
     const keyword=e.target.value.toLowerCase();
-
     const filtered=books.filter(book=>
-
         book.title.toLowerCase().includes(keyword)
         ||
         book.author.toLowerCase().includes(keyword)
-
     );
-
     renderBooks(filtered);
 });
 
 loadBooks();
-
 </script>
 
 </body>
