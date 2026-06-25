@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Books Catalogue</title>
+
+<style>
+
+:root{
+    --primary:#3d5a80;
+    --accent:#ee6c4d;
+    --bg:#f8f9fa;
+    --card:#ffffff;
+    --text:#293241;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    padding:40px 20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+header{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+h1{
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+.search-box{
+    max-width:600px;
+    margin:auto;
+}
+
+#searchInput{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid #ccc;
+    font-size:16px;
+}
+
+/* CAROUSEL */
+
+.carousel-section{
+    margin-top:35px;
+    margin-bottom:50px;
+}
+
+.carousel-header{
+    font-size:1.5rem;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.carousel{
+    display:flex;
+    gap:18px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    padding-bottom:10px;
+}
+
+.carousel::-webkit-scrollbar{
+    height:8px;
+}
+
+.carousel::-webkit-scrollbar-thumb{
+    background:#bbb;
+    border-radius:20px;
+}
+
+.carousel-item{
+    flex:0 0 auto;
+    width:160px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.carousel-item:hover{
+    transform:translateY(-4px);
+}
+
+.carousel-item img{
+    width:100%;
+    height:240px;
+    object-fit:cover;
+    border-radius:12px;
+    box-shadow:0 3px 12px rgba(0,0,0,.15);
+}
+
+.carousel-title{
+    margin-top:10px;
+    text-align:center;
+    font-weight:600;
+    font-size:14px;
+}
+
+.carousel-rating{
+    text-align:center;
+    color:#f4a300;
+    margin-top:5px;
+}
+
+/* BOOK CARDS */
+
+#booksContainer{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.book-card{
+    display:flex;
+    gap:25px;
+    background:white;
+    padding:20px;
+    border-radius:16px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.book-cover{
+    width:180px;
+    flex-shrink:0;
+}
+
+.book-cover img{
+    width:100%;
+    border-radius:12px;
+}
+
+.book-info{
+    flex:1;
+}
+
+.book-title{
+    font-size:1.8rem;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.book-author{
+    color:#666;
+    margin-bottom:12px;
+}
+
+.rating{
+    color:#f4a300;
+    font-size:18px;
+    margin-bottom:15px;
+}
+
+.synopsis{
+    line-height:1.8;
+}
+
+@media(max-width:768px){
+
+    .book-card{
+        flex-direction:column;
+    }
+
+    .book-cover{
+        width:220px;
+        margin:auto;
+    }
+
+    h1{
+        font-size:2rem;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+
+```
+<h1>Books Catalogue</h1>
+
+<div class="search-box">
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search by title or author..."
+    >
+</div>
+```
+
+</header>
+
+<section class="carousel-section">
+
+```
+<div class="carousel-header">
+    Featured Books
+</div>
+
+<div id="bookCarousel" class="carousel"></div>
+```
+
+</section>
+
+<section id="booksContainer"></section>
+
+</div>
+
+<script>
+
+let books=[];
+
+function generateStars(rating){
+
+    const full=Math.round(rating);
+
+    return "★".repeat(full) + "☆".repeat(5-full);
+}
+
+async function loadBooks(){
+
+    const response=await fetch("books.json");
+
+    books=await response.json();
+
+    renderCarousel(books);
+
+    renderBooks(books);
+}
+
+function renderCarousel(data){
+
+    const carousel=document.getElementById("bookCarousel");
+
+    carousel.innerHTML="";
+
+    data.forEach((book,index)=>{
+
+        carousel.innerHTML += `
+        <div class="carousel-item"
+             onclick="scrollToBook(${index})">
+
+            <img src="${book.cover}" alt="${book.title}">
+
+            <div class="carousel-title">
+                ${book.title}
+            </div>
+
+            <div class="carousel-rating">
+                ${generateStars(book.rating)}
+            </div>
+
+        </div>
+        `;
+    });
+}
+
+function renderBooks(data){
+
+    const container=document.getElementById("booksContainer");
+
+    container.innerHTML="";
+
+    data.forEach((book,index)=>{
+
+        container.innerHTML += `
+
+        <article class="book-card"
+                 id="book-${index}">
+
+            <div class="book-cover">
+                <img src="${book.cover}">
+            </div>
+
+            <div class="book-info">
+
+                <div class="book-title">
+                    ${book.title}
+                </div>
+
+                <div class="book-author">
+                    ${book.author}
+                </div>
+
+                <div class="rating">
+                    ${generateStars(book.rating)}
+                    (${book.rating})
+                </div>
+
+                <div class="synopsis">
+                    ${book.synopsis}
+                </div>
+
+            </div>
+
+        </article>
+        `;
+    });
+}
+
+function scrollToBook(index){
+
+    document
+    .getElementById(`book-${index}`)
+    .scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+    });
+}
+
+document
+.getElementById("searchInput")
+.addEventListener("input",(e)=>{
+
+    const keyword=e.target.value.toLowerCase();
+
+    const filtered=books.filter(book=>
+
+        book.title.toLowerCase().includes(keyword)
+        ||
+        book.author.toLowerCase().includes(keyword)
+
+    );
+
+    renderBooks(filtered);
+});
+
+loadBooks();
+
+</script>
+
+</body>
+</html>

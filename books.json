@@ -1,0 +1,51 @@
+[
+{
+      title: "The Body Keeps The Score",
+      author: "Bessel van der Kolk",
+      rating: "4.34",
+      synopsis: "A pioneering researcher transforms our understanding of trauma and offers a bold new paradigm for healing. Dr. van der Kolk uses recent scientific advances to show how trauma literally reshapes both body and brain, compromising sufferers' capacities for pleasure, engagement, self-control, and trust.",
+      cover: "https://covers.openlibrary.org/b/isbn/9780143127741-L.jpg"
+    },
+    {
+      title: "Welcome to the Hyunam-dong Bookshop",
+      author: "Hwang Bo-reum",
+      rating: "4.09",
+      synopsis: "Yeongju is burned out. Quitting her job and divorcing her husband, she moves to a quiet residential neighborhood outside Seoul and opens the Hyunam-dong Bookshop. It depicts her journey towards inner peace and business success, while focusing on the other people around her and their personal journeys of self-discovery.",
+      cover: "https://covers.openlibrary.org/b/isbn/9781526662283-L.jpg"
+    },
+    {
+      title: "All the Lovers in the Night",
+      author: "Mieko Kawakami",
+      rating: "3.66",
+      synopsis: "Fuyuko Irie is a freelance copy editor in her mid-thirties. Working and living alone in a city where it is not easy to form new relationships. When she notices her reflection in a storefront window, she sees a spiritless woman and decides to do something about it. A beautiful novel exploring the quiet tragedy of ordinary life.",
+      cover: "https://covers.openlibrary.org/b/isbn/9781609457661-L.jpg"
+    },
+    {
+      title: "Norwegian Wood",
+      author: "Haruki Murakami",
+      rating: "4.04",
+      synopsis: "A stunning and elegiac novel of first love, the story of Toru, a quiet and preternaturally serious young college student in Tokyo, who is devoted to Naoko, a beautiful and introspective young woman, but their mutual passion is marked by the tragic death of their best friend years before.",
+      cover: "https://covers.openlibrary.org/b/isbn/9780375704024-L.jpg"
+    },
+    {
+      title: "Against the Loveless World",
+      author: "Susan Abulhawa",
+      rating: "4.51",
+      synopsis: "As Nahr sits, locked away in solitary confinement, she reflects on the dramatic events that landed her in prison. Born in Kuwait to Palestinian refugees, her family teeters on the brink of poverty, the US invasion of Iraq makes her a refugee, and she eventually lands in Palestine. An absolutely magnificent portrait of struggle, survival, and liberation.",
+      cover: "https://covers.openlibrary.org/b/isbn/9781982137038-L.jpg"
+    },
+    {
+      title: "The Art of Thinking Clearly",
+      author: "Rolf Dobelli",
+      rating: "3.85",
+      synopsis: "Have you ever invested time in something that, with hindsight, just wasn't worth it? Or continued doing something you knew was bad for you? These are examples of cognitive biases, simple errors we all make in our day-to-day thinking. But by knowing what they are and how to spot them, we can avoid them and make better choices. Simple, clear, and always surprising, this indispensable book will change the way you think and transform your decision-making.",
+      cover: "https://covers.openlibrary.org/b/isbn/9780062219695-L.jpg"
+    },
+    {
+      title: "Minor Detail",
+      author: "Adania Shibli",
+      rating: "4.17",
+      synopsis: "Minor Detail begins during the summer of 1949, one year after the war that the Palestinians mourn as the Nakba, and the Israelis celebrate as the War of Independence. Israeli soldiers capture and rape a young Palestinian woman, and kill and bury her in the sand. Many years later, a woman in Ramallah becomes fascinated to the point of obsession with this 'minor detail' of history. A haunting meditation on war, violence and memory.",
+      cover: "https://covers.openlibrary.org/b/isbn/9780811229074-L.jpg"
+    }
+]
